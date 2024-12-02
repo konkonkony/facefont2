@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script defer src="face-api.min.js"></script>
+    <script defer src="script.js"></script>
+    <script src="https://unpkg.com/budoux/bundle/budoux-ja.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+           min-height: 100vh; /* 高さを自動に設定 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(252, 255, 235);
+            position: relative;
+            overflow-y: auto; /* スクロールを許可 */
+        }
+
+        /* .container { */
+            /* color: pink; */
+            /* margin: 10px; */
+        /* } */
+
+        #canvas {
+            position: absolute;
+    width: 100%;
+    max-width: 320px;
+    top: -20px;
+    margin: 20px 0;
+    object-fit: contain;
+        }
+        
+        video{
+
+            width: 100%;
+max-width: 320px;
+top: 20px;
+margin: 20px 0;
+object-fit: contain;
+
+         }
+
+
+
+        h1, h2, h3 {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            
+        }
+
+        h1 {
+            color: orange;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            margin-bottom: 10px;
+        }
+
+        #Sentence, #setumei, #detections {
+            width: 90%;
+            max-width: 600px;
+            margin: 10px auto;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #Sentence {
+            font-size: 12px;
+            word-wrap: break-word;
+        }
+
+        #setumei {
+            font-size: 14px;
+        }
+
+        #detections {
+            color: blue;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        #QR img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .container button {
+            font-size: 16px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <video id="video" autoplay muted playsinline></video>
+<canvas id="canvas"></canvas>
+
+    <div id="detections"></div>
+    <div class="container">
+        <h3>0</h3>
+        <button id="increment">+</button>
+        <button id="reset">reset</button>
+    </div>
+    <h1>顔表情でフォントサイズ補正するシステムに関する研究</h1>
+    <h2>銀河鉄道の夜　一、午后ごごの授業    </h2>
+    <h3></h3>
+    <div id="QR">
+        <img src="QR.png" alt="QR Code">
+    </div>
+
+  <div id="setumei">
+    </div>
+
+    <div id="Sentence">
+        <budoux-ja>
+            「ではみなさんは、そういうふうに川だと云いわれたり、乳の流れたあとだと云われたりしていたこのぼんやりと白いものがほんとうは何かご承知ですか。」先生は、黒板に吊つるした大きな黒い星座の図の、上から下へ白くけぶった銀河帯のようなところを指さしながら、みんなに問といをかけました。
+　カムパネルラが手をあげました。それから四五人手をあげました。ジョバンニも手をあげようとして、急いでそのままやめました。たしかにあれがみんな星だと、いつか雑誌で読んだのでしたが、このごろはジョバンニはまるで毎日教室でもねむく、本を読むひまも読む本もないので、なんだかどんなこともよくわからないという気持ちがするのでした。
+　ところが先生は早くもそれを見附みつけたのでした。
+「ジョバンニさん。あなたはわかっているのでしょう。」
+　ジョバンニは勢いきおいよく立ちあがりましたが、立って見るともうはっきりとそれを答えることができないのでした。ザネリが前の席からふりかえって、ジョバンニを見てくすっとわらいました。ジョバンニはもうどぎまぎしてまっ赤になってしまいました。先生がまた云いました。
+「大きな望遠鏡で銀河をよっく調べると銀河は大体何でしょう。」
+　やっぱり星だとジョバンニは思いましたがこんどもすぐに答えることができませんでした。
+　先生はしばらく困ったようすでしたが、眼めをカムパネルラの方へ向けて、
+「ではカムパネルラさん。」と名指しました。するとあんなに元気に手をあげたカムパネルラが、やはりもじもじ立ち上ったままやはり答えができませんでした。
+        </budoux-ja>
+    </div>
+   
+   
+
+    <script>
+        window.onload = function() {
+            const video = document.getElementById('video');
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    video.srcObject = stream;
+                    video.play();
+                })
+                .catch(function(err) {
+                    console.error("カメラの起動に失敗しました: ", err);
+                });
+        };
+    </script>
+</body>
+</html>
